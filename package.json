@@ -1,6 +1,6 @@
 {
-  "name": "email-validator",
-  "version": "1.0.0",
+  "name": "email-validator-qs",
+  "version": "1.0.1",
   "author": "Tom Gazit <tomgazit@gmail.com>",
   "description": "An email validator including quoted string for local part",
   "main": "index",

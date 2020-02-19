@@ -28,11 +28,12 @@ const validSupported =
 	"digit-only-domain-with-subdomain@sub.123.com",
 	"`a@a.fr",
 	"\"quoted\"@sld.com",
-	"\"\\e\\s\\c\\a\\p\\e\\d\"@sld.com",
+	"\"\\\\e\\\\s\\\\c\\\\a\\\\p\\\\e\\\\d\"@sld.com",
 	"\"quoted-at-sign@sld.org\"@sld.com",
 	"\"escaped\\\"quote\"@sld.com",
-	"\"back\\slash\"@sld.com",
+	"\"back\\\\slash\"@sld.com",
 	"\"backslash.\"@sld.com",
+	"\"doublequ\\\"otes.\"@sld.com",
 	"\"back@s@a@sh\"@sld.com",
 	"\"back..slash\"@sld.com",
 ];
@@ -55,6 +56,7 @@ const invalidSupported =
 	"partially.\"quoted\"@sld.com",
 	"the-local-part-is-invalid-if-it-is-longer-than-sixty-four-characters@sld.net",
 	"missing-sld@.com",
+	"\"doublequ\"otes.\"@sld.com",
 	"sld-starts-with-dashsh@-sld.com",
 	"sld-ends-with-dash@sld-.com",
 	"invalid-characters-in-sld@! \"#$%(),/;<>_[]`|.org",
@@ -76,19 +78,19 @@ const invalidSupported =
 describe('TEST EMAILS AGAINST VALIDATOR', () => {
 	it('Should Be Valid', () => {
          validSupported.forEach( email => {
-         	expect(validator.validate(email)).to.equal(true);
+         	expect(validator.validate(email)).to.equal(true, `email: ${email}`);
          });
 	});
 
 	it('Should Be Invalid', () => {
          invalidSupported.forEach( email => {
-         	expect(validator.validate(email)).to.equal(false);
+         	expect(validator.validate(email)).to.equal(false, `email: ${email}`);
          });
 	});
 
 	it('Should Be Invalid(UnSupported By Module)', () => {
          validUnsupported.forEach( email => {
-         	expect(validator.validate(email)).to.equal(false);
+         	expect(validator.validate(email)).to.equal(false, `email: ${email}`);
          });
 	});
 });
